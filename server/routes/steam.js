@@ -1,7 +1,9 @@
-const express = require('express');
-const axios = require('axios');
+import express from 'express';
+import { getProfile } from '../controllers/steamController.js';
+
 const router = express.Router();
 
-const STEAM_API_KEY = 'https://api.steampowered.com';
-const STEAM_STORE_URL = 'https://store.steampowered.com/api';
+router.get('/profile', getProfile);
+
+export default router;
 

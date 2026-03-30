@@ -1,4 +1,2 @@
-modeul.exports = {
-    STEAM_API_KEY: 'https://api.steampowered.com',
-    STEAM_STORE_URL: 'https://store.steampowered.com/api'
-};
+export const STEAM_API_URL = 'https://api.steampowered.com';
+export const STEAM_STORE_URL = 'https://store.steampowered.com/api';
