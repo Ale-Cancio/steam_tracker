@@ -57,4 +57,20 @@ const getOwnedGames = async (req, res) => {
     }
 };
 
+getAchievements = async (req, res) => {
+    try {
+        const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetPlayerAchievements/v0001/`, {
+            params: {
+                key: STEAM_API_KEY,
+                steamid: STEAM_USER_ID,
+                appid: 440 // Example app ID for Team Fortress 2
+            }
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: 'Failed to fetch achievements data' });
+    }
+};
+
 export { getProfile, getRecentlyPlayedGames, getOwnedGames };
