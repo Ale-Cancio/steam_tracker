@@ -57,13 +57,14 @@ const getOwnedGames = async (req, res) => {
     }
 };
 
-getAchievements = async (req, res) => {
+const getAchievements = async (req, res) => {
     try {
+        const { appid } = req.params;
         const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetPlayerAchievements/v0001/`, {
             params: {
                 key: STEAM_API_KEY,
                 steamid: STEAM_USER_ID,
-                appid: 440 // Example app ID for Team Fortress 2
+                appid: appid // Example app ID for Team Fortress 2
             }
         });
         res.json(response.data);
@@ -73,4 +74,4 @@ getAchievements = async (req, res) => {
     }
 };
 
-export { getProfile, getRecentlyPlayedGames, getOwnedGames };
+export { getProfile, getRecentlyPlayedGames, getOwnedGames, getAchievements };

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getProfile, getOwnedGames } from "../services/steamService.js"; 
 import ProfileCard from "../components/ProfileCard.jsx";
 import StatsOverview from "../components/StatsOverview.jsx";
+import GameList from "../components/GameList.jsx";
 
 function Home() {
     const [profile, setProfile] = useState(null);
@@ -25,6 +26,7 @@ function Home() {
             }
         };
 
+
         loadProfile();
         loadGames();
     }, []);
@@ -36,7 +38,10 @@ function Home() {
             <ProfileCard profile={profile.response.players[0]} />
         )}
         {games.length > 0 && (
-            <StatsOverview games={games} />
+            <div>
+                <StatsOverview games={games} />
+                <GameList games={games} />
+            </div>
         )}
     </div>
 );

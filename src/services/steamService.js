@@ -32,4 +32,15 @@ export const getOwnedGames = async () => {
     }
 };
 
+export const getAchievements = async (appid) => {
+    try {
+        const response = await axios.get(`${API_URL}/achievements/${appid}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching achievements:', error);
+        throw error;
+    };
+}
+
+
 
