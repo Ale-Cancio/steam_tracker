@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAchievements } from '../services/steamService.js';
+import { useCompletedGames } from '../hooks/useCompletedGames.jsx';
 
 function GameDetail() {
     const { appid } = useParams();
     const [achievements, setAchievements] = useState([]);
     const [gameStats, setGameStats] = useState(null);
+    const { completedGames, toggleComplete } = useCompletedGames();
+    const isCompleted = completedGames.includes(Number(appid));
+    
+    
 
     useEffect(() => {
         const loadAchievements = async () => {
@@ -31,6 +36,9 @@ function GameDetail() {
                 </li>
             ))}
         </ul>
+        <button onClick={() => toggleComplete(Number(appid))}>
+            {isCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
+        </button>
     </div>
 );
 }

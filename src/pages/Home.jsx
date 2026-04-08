@@ -32,8 +32,8 @@ function Home() {
     }, []);
 
     return (
-    <div>
-        <h1>Steam Profile</h1>
+    <div className="min-h-screen text-white p-8" style={{backgroundColor: '#1b2838'}}>
+        <h1 className="text-3xl font-bold text-blue-500">Steam Profile</h1>
         {profile && (
             <ProfileCard profile={profile.response.players[0]} />
         )}

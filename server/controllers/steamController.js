@@ -74,4 +74,39 @@ const getAchievements = async (req, res) => {
     }
 };
 
-export { getProfile, getRecentlyPlayedGames, getOwnedGames, getAchievements };
+const getNews = async (req, res) => {
+    try {
+        const { appid } = req.params;
+        const response = await axios.get(`${STEAM_API_URL}/ISteamNews/GetNewsForApp/v0002/`, {
+            params: { 
+                key: STEAM_API_KEY,
+                appid: appid, // Example app ID for Team Fortress 2
+                count: 5
+            }
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: 'Failed to fetch news data' });
+    }
+};
+
+const getGlobalAchievementsPercentagesForApp = async (req, res) => {
+    try {
+        const {appid} = req.params;
+        const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/`, {
+            params: {
+                key: STEAM_API_KEY,
+                appid: appid
+            }
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: 'Failed to fetch global achievements percentages data' });
+    }
+};
+
+
+
+export { getProfile, getRecentlyPlayedGames, getOwnedGames, getAchievements, getNews, getGlobalAchievementsPercentagesForApp };
