@@ -60,17 +60,36 @@ const getOwnedGames = async (req, res) => {
 const getAchievements = async (req, res) => {
     try {
         const { appid } = req.params;
+        console.log(`Fetching achievements for appid: ${appid}`);
         const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetPlayerAchievements/v0001/`, {
             params: {
                 key: STEAM_API_KEY,
                 steamid: STEAM_USER_ID,
-                appid: appid // Example app ID for Team Fortress 2
+                appid: appid, // Example app ID for Team Fortress 2
+                l: 'english'
             }
         });
         res.json(response.data);
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ error: 'Failed to fetch achievements data' });
+    }
+};
+
+const getGameSchema = async (req, res) => {
+    try {
+        const { appid } = req.params;
+        const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetSchemaForGame/v2/`, {
+            params: {
+                key: STEAM_API_KEY,
+                appid: appid,
+                l: 'english'
+            }
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: 'Failed to fetch game schema' });
     }
 };
 
@@ -93,11 +112,10 @@ const getNews = async (req, res) => {
 
 const getGlobalAchievementsPercentagesForApp = async (req, res) => {
     try {
-        const {appid} = req.params;
+        const { appid } = req.params;
         const response = await axios.get(`${STEAM_API_URL}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/`, {
             params: {
-                key: STEAM_API_KEY,
-                appid: appid
+                gameid: appid
             }
         });
         res.json(response.data);
@@ -109,4 +127,4 @@ const getGlobalAchievementsPercentagesForApp = async (req, res) => {
 
 
 
-export { getProfile, getRecentlyPlayedGames, getOwnedGames, getAchievements, getNews, getGlobalAchievementsPercentagesForApp };
+export { getProfile, getRecentlyPlayedGames, getOwnedGames, getAchievements, getGameSchema, getNews, getGlobalAchievementsPercentagesForApp };
