@@ -16,14 +16,11 @@ function GameList({ games }) {
                     onClick={() => navigate(`/game/${game.appid}`)}
                     className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition"
                 >
-                    {/* 🎮 Game Banner */}
                     <img
                         src={`https://steamcdn-a.akamaihd.net/steam/apps/${game.appid}/header.jpg`}
                         alt={game.name}
                         className="w-full"
                     />
-
-                    {/* 📊 Game Info */}
                     <div className="p-2">
                         <p className="text-sm font-semibold">{game.name}</p>
                         <p className="text-xs text-gray-400">
