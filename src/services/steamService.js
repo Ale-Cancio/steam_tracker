@@ -40,28 +40,7 @@ export const getAchievements = async (appid) => {
         console.error('Error fetching achievements:', error);
         throw error;
     };
-
 }
-
-export const getGlobalAchievementPercentages = async (appid) => {
-    try {
-        const response = await axios.get(`${API_URL}/achievement-percentages/${appid}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching achievement percentages:', error);
-        throw error;
-    }
-};
-
-export const getGameSchema = async (appid) => {
-    try {
-        const response = await axios.get(`${API_URL}/schema/${appid}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching game schema:', error);
-        throw error;
-    }
-};
 
 
 
